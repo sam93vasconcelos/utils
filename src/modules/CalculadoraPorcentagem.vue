@@ -13,12 +13,12 @@
       <div class="col-md-2">
         <b-form-group
           label="Valor"
-          label-for="valor"
+          label-for="qtd"
         >
-          <b-form-input @input="calculaP()" id="valor" v-model="valor" placeholder="10.000"></b-form-input>
+          <b-form-input @input="calculaP()" id="qtd" v-model="valor" placeholder="10.000"></b-form-input>
         </b-form-group>
       </div>
-      <span style="font-size: 24px; transform: translateY(30px);">=</span>
+      <span style="font-size: 24px; transform: translateY(30px);" class="d-none d-sm-block">=</span>
       <div class="col-md-2">
         <b-form-group
           label="Resultado"

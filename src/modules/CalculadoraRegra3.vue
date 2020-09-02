@@ -42,7 +42,7 @@ export default {
       if (this.a != '' && this.b != '' && this.c != '') {
         let calculo1 = this.c * this.b
         let final = calculo1 / this.a
-        this.x = final.toFixed(4)
+        this.x = final
       } else {
         this.x = ''
       }

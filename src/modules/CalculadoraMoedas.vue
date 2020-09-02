@@ -41,11 +41,11 @@
         </div>
       </div>
     </div>
-    <div v-if="!this.moedas">
+    <div v-if="this.loading">
       <img src="../assets/balls.gif" alt="Gif Carregando">
     </div>
-    <div class="alert alert-dismissible alert-danger" v-if="this.error">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <div class="alert alert-dismissible alert-danger" v-if="this.error && !this.dismissed">
+      <button type="button" class="close" @click="dismiss" data-dismiss="alert">&times;</button>
       <strong>Ops...</strong> Não foi possível conectar ao servidor de moedas :/
     </div>
   </div>
@@ -62,20 +62,27 @@ export default {
       error: false,
       usd: '',
       eur: '',
-      btc: ''
+      btc: '',
+      dismissed: false,
+      loading: true
     }
   },
   created() {
     axios.get('https://economia.awesomeapi.com.br/all/USD-BRL,EUR-BRL,BTC-BRL')
     .then(res => {
-      this.moedas = res.data
+      this.moedas = res.data,
+      this.loading = false
     })
     .catch(err => {
       console.log(err)
       this.error = true
+      this.loading = false
     })
   },
   methods: {
+    dismiss() {
+      this.dismissed = true
+    },
     tiraVirgula() {
       this.valor = this.valor.toString().replace(',','.')
       this.usd = this.usd.toString().replace(',','.')
